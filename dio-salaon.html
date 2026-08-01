@@ -1020,26 +1020,6 @@
         font-size: 13px;
         letter-spacing: 0.06em;
       }
-      .form-status {
-        display: none;
-        margin-top: 14px;
-        font-size: 12.5px;
-        line-height: 1.5;
-        padding: 11px 12px;
-        border: 1px solid transparent;
-      }
-      .form-status.error {
-        display: block;
-        background: rgba(255, 255, 255, 0.06);
-        color: #f6c9c9;
-        border-color: rgba(246, 201, 201, 0.4);
-      }
-      .form-status.success {
-        display: block;
-        background: rgba(169, 201, 160, 0.09);
-        color: var(--sage-bright);
-        border-color: rgba(169, 201, 160, 0.4);
-      }
 
       /* ---------- faq ---------- */
       #faq {
@@ -1250,7 +1230,110 @@
         cursor: pointer;
       }
 
+      /* ---------- chatbot ---------- */
+      .chatbot-launch {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        z-index: 170;
+        border: 0;
+        background: var(--sage-bright);
+        color: var(--ink);
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 12px 28px rgba(11, 15, 12, 0.24);
+        font-size: 22px;
+        font-weight: 800;
+      }
+      .chatbot-panel {
+        position: fixed;
+        right: 22px;
+        bottom: 92px;
+        width: min(360px, calc(100vw - 28px));
+        background: var(--paper);
+        border: 1px solid var(--line-light);
+        border-radius: 12px;
+        box-shadow: 0 18px 42px rgba(11, 15, 12, 0.2);
+        z-index: 170;
+        overflow: hidden;
+        display: none;
+      }
+      .chatbot-panel.open {
+        display: block;
+      }
+      .chatbot-head {
+        background: var(--ink);
+        color: var(--paper);
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .chatbot-head strong {
+        font-size: 14px;
+      }
+      .chatbot-head button {
+        border: 0;
+        background: transparent;
+        color: var(--paper);
+        cursor: pointer;
+        font-size: 20px;
+      }
+      .chatbot-messages {
+        max-height: 280px;
+        overflow: auto;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .msg {
+        max-width: 82%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .msg.bot {
+        align-self: flex-start;
+        background: #eae9e2;
+        color: var(--ink);
+      }
+      .msg.user {
+        align-self: flex-end;
+        background: var(--sage-bright);
+        color: var(--ink);
+      }
+      .chatbot-form {
+        display: flex;
+        gap: 10px;
+        padding: 12px;
+        border-top: 1px solid var(--line-light);
+        background: var(--paper);
+      }
+      .chatbot-form input {
+        width: 100%;
+        border: 1px solid var(--line-light);
+        background: transparent;
+        padding: 10px 12px;
+        color: var(--ink);
+        outline: none;
+      }
+      .chatbot-form button {
+        border: 0;
+        background: var(--ink);
+        color: var(--paper);
+        padding: 10px 14px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
       @media (max-width: 1080px) {
+        .wrap {
+          padding: 0 22px;
+        }
         .serv-grid {
           grid-template-columns: repeat(2, 1fr);
         }
@@ -1277,17 +1360,56 @@
         .hero-grid {
           grid-template-columns: 1fr;
         }
+        .hero-grid {
+          gap: 34px;
+          padding-bottom: 60px;
+        }
       }
       @media (max-width: 720px) {
-        nav.links,
-        .hamburger + .btn-ghost {
+        .wrap {
+          padding: 0 18px;
+        }
+        header {
+          padding: 14px 0;
+        }
+        .nav-row {
+          flex-wrap: wrap;
+          row-gap: 12px;
+        }
+        .logo-word {
+          font-size: 18px;
+        }
+        nav.links {
           display: none;
         }
         .hamburger {
           display: flex;
         }
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .hero-actions .btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .hero-sub {
+          font-size: 16px;
+        }
+        .next-slot {
+          padding: 20px 18px;
+        }
+        .next-slot h3 {
+          font-size: 22px;
+        }
+        .slot-row {
+          font-size: 12.5px;
+        }
         section.pad {
           padding: 80px 0;
+        }
+        .sec-head {
+          margin-bottom: 40px;
         }
         .serv-grid,
         .prod-grid,
@@ -1301,15 +1423,51 @@
         .form-grid {
           grid-template-columns: 1fr;
         }
+        .book-form,
         .cont-info {
-          padding: 30px;
+          padding: 28px;
+        }
+        .foot-grid {
+          grid-template-columns: 1fr;
+        }
+        .foot-bottom {
+          flex-direction: column;
+          align-items: flex-start;
         }
       }
       @media (max-width: 480px) {
+        .hero-title {
+          font-size: clamp(34px, 11vw, 52px);
+        }
+        .hero-sub {
+          font-size: 15px;
+        }
         .serv-grid,
         .prod-grid,
         .team-grid {
           grid-template-columns: 1fr;
+        }
+        .gal-grid {
+          grid-template-columns: 1fr;
+          grid-auto-rows: 190px;
+        }
+        .gal-item.big {
+          grid-column: span 1;
+          grid-row: span 1;
+        }
+        .rev-text {
+          min-height: auto;
+        }
+        .cont-row {
+          flex-direction: column;
+          gap: 8px;
+        }
+        .cont-row .k {
+          width: auto;
+        }
+        .btn {
+          padding: 12px 20px;
+          font-size: 12px;
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -1352,7 +1510,6 @@
           <a href="#contato">Contato</a>
         </nav>
         <div style="display: flex; gap: 12px; align-items: center">
-          <a href="#" class="btn btn-ghost" style="padding: 11px 18px">Login</a>
           <a href="#agendar" class="btn btn-solid">Agendar</a>
           <button class="hamburger" id="hamBtn" aria-label="Abrir menu">
             <span></span><span></span><span></span>
@@ -1488,13 +1645,9 @@
           <div>
             <span class="sec-tag tag-dark">Serviços</span>
             <h2 class="sec-title" style="color: var(--paper)">
-              O cardápio da casa.
+              Meus Serviços.
             </h2>
           </div>
-          <p class="sec-desc desc-dark">
-            Seis serviços centrais, executados com a mesma régua de qualidade —
-            do clássico ao contemporâneo.
-          </p>
         </div>
         <div class="serv-grid">
           <!-- card template repeated -->
@@ -1684,10 +1837,6 @@
             <span class="sec-tag tag-light">Galeria</span>
             <h2 class="sec-title">Cortes que falam por si.</h2>
           </div>
-          <p class="sec-desc desc-light">
-            Um recorte do nosso trabalho, tratado em preto e branco com toque
-            sage — nossa assinatura visual.
-          </p>
         </div>
         <div class="gal-tabs">
           <button class="gal-tab active" data-f="todos">Todos</button>
@@ -1757,8 +1906,7 @@
             </h2>
           </div>
           <p class="sec-desc desc-light">
-            Linha selecionada de pomadas, óleos e ferramentas usadas aqui
-            dentro.
+            Linhas de pomadas, óleos e ferramentas usadas.
           </p>
         </div>
         <div class="prod-grid">
@@ -1840,10 +1988,6 @@
               Quem segura a navalha.
             </h2>
           </div>
-          <p class="sec-desc desc-dark">
-            Barbeiros com especialidades distintas — escolha por afinidade de
-            estilo.
-          </p>
         </div>
         <div class="team-grid">
           <div class="ticket ticket-dark rv rv-1">
@@ -1876,33 +2020,6 @@
           <div class="ticket ticket-dark rv rv-2">
             <div class="duotone team-photo">
               <img
-                src="https://picsum.photos/seed/dio-t2/500/650"
-                alt="Rafael Souza"
-              />
-            </div>
-            <div class="team-body">
-              <h3>Rafael Souza</h3>
-              <span class="team-spec">Barba & Pigmentação</span>
-              <div class="team-meta">
-                <span class="team-exp">7 anos</span
-                ><a href="#" class="team-ig">@rafa.souza</a>
-              </div>
-              <a
-                href="#agendar"
-                class="btn btn-ghost"
-                style="
-                  width: 100%;
-                  justify-content: center;
-                  margin-top: 16px;
-                  padding: 10px;
-                "
-                >Agendar</a
-              >
-            </div>
-          </div>
-          <div class="ticket ticket-dark rv rv-3">
-            <div class="duotone team-photo">
-              <img
                 src="https://picsum.photos/seed/dio-t3/500/650"
                 alt="Bruno Alves"
               />
@@ -1913,33 +2030,6 @@
               <div class="team-meta">
                 <span class="team-exp">12 anos</span
                 ><a href="#" class="team-ig">@bruno.alves</a>
-              </div>
-              <a
-                href="#agendar"
-                class="btn btn-ghost"
-                style="
-                  width: 100%;
-                  justify-content: center;
-                  margin-top: 16px;
-                  padding: 10px;
-                "
-                >Agendar</a
-              >
-            </div>
-          </div>
-          <div class="ticket ticket-dark rv rv-4">
-            <div class="duotone team-photo">
-              <img
-                src="https://picsum.photos/seed/dio-t4/500/650"
-                alt="Kaique Lima"
-              />
-            </div>
-            <div class="team-body">
-              <h3>Kaique Lima</h3>
-              <span class="team-spec">Infantil & Social</span>
-              <div class="team-meta">
-                <span class="team-exp">5 anos</span
-                ><a href="#" class="team-ig">@kaique.lima</a>
               </div>
               <a
                 href="#agendar"
@@ -2103,21 +2193,19 @@
         </div>
 
         <div class="ticket ticket-dark book-form rv rv-1">
-          <form id="bookForm" novalidate>
+          <form id="bookForm">
             <div class="form-grid">
               <div class="field">
                 <label>Barbeiro</label>
-                <select id="barbeiro" required>
+                <select required>
                   <option value="">Selecione</option>
                   <option>Diego Martins</option>
-                  <option>Rafael Souza</option>
                   <option>Bruno Alves</option>
-                  <option>Kaique Lima</option>
                 </select>
               </div>
               <div class="field">
                 <label>Serviço</label>
-                <select id="servico" required>
+                <select required>
                   <option value="">Selecione</option>
                   <option>Corte Tradicional</option>
                   <option>Degradê</option>
@@ -2126,49 +2214,30 @@
                 </select>
               </div>
               <div class="field">
-                <label>Data</label
-                ><input id="dataAgendamento" type="date" required />
+                <label>Data</label><input type="date" required />
               </div>
               <div class="field">
-                <label>Horário</label
-                ><input id="horarioAgendamento" type="time" required />
+                <label>Horário</label><input type="time" required />
               </div>
               <div class="field full">
                 <label>Nome completo</label
-                ><input
-                  id="nomeCliente"
-                  type="text"
-                  placeholder="Seu nome"
-                  required
-                />
+                ><input type="text" placeholder="Seu nome" required />
               </div>
               <div class="field">
                 <label>Telefone</label
-                ><input
-                  id="telefoneCliente"
-                  type="tel"
-                  placeholder="(11) 99999-0000"
-                  required
-                />
+                ><input type="tel" placeholder="(11) 99999-0000" required />
               </div>
               <div class="field">
                 <label>E-mail</label
-                ><input
-                  id="emailCliente"
-                  type="email"
-                  placeholder="voce@email.com"
-                  required
-                />
+                ><input type="email" placeholder="voce@email.com" required />
               </div>
               <div class="field full">
                 <label>Observações</label
                 ><textarea
-                  id="obsCliente"
                   placeholder="Alguma preferência ou observação?"
                 ></textarea>
               </div>
             </div>
-            <div class="form-status" id="formStatus" aria-live="polite"></div>
             <button type="submit" class="btn btn-solid book-submit">
               Confirmar Agendamento
             </button>
@@ -2315,6 +2384,35 @@
         </div>
       </div>
     </section>
+
+    <button
+      class="chatbot-launch"
+      id="chatbotLaunch"
+      aria-label="Abrir assistente"
+    >
+      ✦
+    </button>
+
+    <div class="chatbot-panel" id="chatbotPanel">
+      <div class="chatbot-head">
+        <strong>Dio-Salaon Assistant</strong>
+        <button id="chatbotClose" aria-label="Fechar assistente">×</button>
+      </div>
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="msg bot">
+          Olá! Posso ajudar com horários, serviços e contato da barbearia.
+        </div>
+      </div>
+      <form class="chatbot-form" id="chatbotForm">
+        <input
+          id="chatbotInput"
+          type="text"
+          placeholder="Digite sua dúvida..."
+          aria-label="Pergunta ao assistente"
+        />
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
 
     <!-- ================= FOOTER ================= -->
     <footer>
@@ -2482,49 +2580,110 @@
         });
       });
 
+      // chatbot
+      const chatbotLaunch = document.getElementById("chatbotLaunch");
+      const chatbotPanel = document.getElementById("chatbotPanel");
+      const chatbotClose = document.getElementById("chatbotClose");
+      const chatbotForm = document.getElementById("chatbotForm");
+      const chatbotInput = document.getElementById("chatbotInput");
+      const chatbotMessages = document.getElementById("chatbotMessages");
+
+      function addMessage(text, sender) {
+        const div = document.createElement("div");
+        div.className = `msg ${sender}`;
+        div.textContent = text;
+        chatbotMessages.appendChild(div);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      function addTypingIndicator() {
+        const typing = document.createElement("div");
+        typing.className = "msg bot typing";
+        typing.textContent = "...";
+        typing.id = "chatbotTyping";
+        chatbotMessages.appendChild(typing);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      function removeTypingIndicator() {
+        const typing = document.getElementById("chatbotTyping");
+        if (typing) typing.remove();
+      }
+
+      function botReply(question) {
+        const q = question.toLowerCase();
+        if (
+          q.includes("agendar") ||
+          q.includes("horário") ||
+          q.includes("data")
+        ) {
+          return "Você pode agendar direto na seção de Reserva Online. Escolha barbeiro, serviço, data e horário e confirme.";
+        }
+        if (
+          q.includes("serviço") ||
+          q.includes("corte") ||
+          q.includes("barba")
+        ) {
+          return "Nossos principais serviços são Corte Tradicional, Degradê, Barba, Sobrancelha, Pigmentação e Combo Corte + Barba.";
+        }
+        if (
+          q.includes("preço") ||
+          q.includes("valor") ||
+          q.includes("quanto")
+        ) {
+          return "Os preços variam de R$ 25 a R$ 90, com opções para corte, barba, sobrancelha e combo completo.";
+        }
+        if (
+          q.includes("whatsapp") ||
+          q.includes("contato") ||
+          q.includes("telefone")
+        ) {
+          return "Você pode falar conosco pelo WhatsApp: (11) 99887-1234 ou pelo e-mail contato@diosalaon.com.br.";
+        }
+        if (
+          q.includes("local") ||
+          q.includes("endereço") ||
+          q.includes("rua")
+        ) {
+          return "Estamos na Rua das Palmeiras, 482 — Jardim América, São Paulo/SP.";
+        }
+        return "Posso ajudar com agendamento, serviços, preços ou contato da barbearia. Pergunte como quiser!";
+      }
+
+      chatbotLaunch.addEventListener("click", () => {
+        chatbotPanel.classList.toggle("open");
+      });
+      chatbotClose.addEventListener("click", () => {
+        chatbotPanel.classList.remove("open");
+      });
+
+      chatbotForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const question = chatbotInput.value.trim();
+        if (!question) return;
+        addMessage(question, "user");
+        chatbotInput.value = "";
+        addTypingIndicator();
+
+        setTimeout(() => {
+          removeTypingIndicator();
+          addMessage(botReply(question), "bot");
+        }, 4000);
+      });
+
       // booking form
       const bookForm = document.getElementById("bookForm");
       const successPanel = document.getElementById("successPanel");
       const resetForm = document.getElementById("resetForm");
-      const formStatus = document.getElementById("formStatus");
-      const dateInput = document.getElementById("dataAgendamento");
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, "0");
-      const dd = String(today.getDate()).padStart(2, "0");
-      dateInput.min = `${yyyy}-${mm}-${dd}`;
-
       bookForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const fields = [
-          document.getElementById("barbeiro"),
-          document.getElementById("servico"),
-          document.getElementById("dataAgendamento"),
-          document.getElementById("horarioAgendamento"),
-          document.getElementById("nomeCliente"),
-          document.getElementById("telefoneCliente"),
-          document.getElementById("emailCliente"),
-        ];
-        const hasEmpty = fields.some((field) => !field.value.trim());
-        if (hasEmpty) {
-          formStatus.className = "form-status error";
-          formStatus.textContent =
-            "Preencha todos os campos obrigatórios antes de confirmar o agendamento.";
-          return;
-        }
-
         const tk = "DIO-" + Math.floor(1000 + Math.random() * 8999);
         document.getElementById("tkNum").textContent = "Ticket " + tk;
-        formStatus.className = "form-status success";
-        formStatus.textContent =
-          "Agendamento validado com sucesso. Seu ticket foi gerado.";
         bookForm.style.display = "none";
         successPanel.classList.add("show");
       });
       resetForm.addEventListener("click", () => {
         bookForm.reset();
-        formStatus.className = "form-status";
-        formStatus.textContent = "";
         bookForm.style.display = "";
         successPanel.classList.remove("show");
       });
