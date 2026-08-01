@@ -1,0 +1,2533 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dio-Salaon — O Seu Estilo Começa Aqui</title>
+    <meta
+      name="description"
+      content="Dio-Salaon — barbearia premium. Cortes modernos, atendimento premium e experiência única."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0b0f0c;
+        --ink-soft: #141915;
+        --paper: #f7f6f1;
+        --paper-dim: #efeee7;
+        --sage: #a9c9a0;
+        --sage-bright: #c3e0b8;
+        --moss: #2e4630;
+        --line-dark: rgba(247, 246, 241, 0.14);
+        --line-light: rgba(11, 15, 12, 0.12);
+        --muted-dark: rgba(247, 246, 241, 0.62);
+        --muted-light: rgba(11, 15, 12, 0.58);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Manrope", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3,
+      .display {
+        font-family: "Fraunces", serif;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        margin: 0;
+      }
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      .wrap {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+      section {
+        position: relative;
+      }
+
+      /* ---------- reveal ---------- */
+      .rv {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .rv.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .rv-1 {
+        transition-delay: 0.05s;
+      }
+      .rv-2 {
+        transition-delay: 0.15s;
+      }
+      .rv-3 {
+        transition-delay: 0.25s;
+      }
+      .rv-4 {
+        transition-delay: 0.35s;
+      }
+
+      /* ---------- duotone photography (signature treatment) ---------- */
+      .duotone {
+        position: relative;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .duotone img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(1) contrast(1.08) brightness(1.02);
+        transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .duotone::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          155deg,
+          rgba(11, 15, 12, 0.88),
+          rgba(169, 201, 160, 0.42)
+        );
+        mix-blend-mode: color;
+        pointer-events: none;
+      }
+      .duotone:hover img {
+        transform: scale(1.06);
+      }
+
+      /* ---------- ticket motif (signature element) ---------- */
+      .ticket {
+        position: relative;
+        background: var(--paper);
+        border: 1px solid var(--line-light);
+        border-radius: 2px;
+      }
+      .ticket::before,
+      .ticket::after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: var(--ink);
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .ticket::before {
+        left: -8px;
+      }
+      .ticket::after {
+        right: -8px;
+      }
+      .ticket-dark {
+        background: var(--ink-soft);
+        border-color: var(--line-dark);
+      }
+      .ticket-dark::before,
+      .ticket-dark::after {
+        background: var(--paper);
+      }
+      .ticket-perf {
+        background-image: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 6px,
+          rgba(11, 15, 12, 0.18) 6px,
+          rgba(11, 15, 12, 0.18) 7px
+        );
+        background-position: 22px 0;
+        background-repeat: no-repeat;
+        background-size: calc(100% - 44px) 1px;
+        background-position-y: var(--perf-y, 0);
+      }
+      .serial {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: var(--muted-light);
+        text-transform: uppercase;
+      }
+      .serial-dark {
+        color: var(--muted-dark);
+      }
+
+      /* ---------- nav ---------- */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 20px 0;
+        transition:
+          background 0.5s ease,
+          backdrop-filter 0.5s ease,
+          padding 0.4s ease,
+          border-color 0.5s ease;
+        border-bottom: 1px solid transparent;
+      }
+      header.scrolled {
+        background: rgba(11, 15, 12, 0.86);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        padding: 14px 0;
+        border-color: var(--line-dark);
+      }
+      .nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--paper);
+      }
+      header:not(.scrolled) .logo {
+        color: var(--paper);
+      }
+      .logo-word {
+        font-family: "Fraunces", serif;
+        font-size: 19px;
+        letter-spacing: 0.02em;
+      }
+      .logo-word b {
+        color: var(--sage-bright);
+        font-weight: 500;
+      }
+      nav.links {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+      }
+      nav.links a {
+        font-size: 13.5px;
+        color: var(--muted-dark);
+        letter-spacing: 0.02em;
+        transition: color 0.3s;
+        position: relative;
+      }
+      nav.links a:hover {
+        color: var(--paper);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: 2px;
+        font-size: 13px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .btn-solid {
+        background: var(--sage-bright);
+        color: var(--ink);
+      }
+      .btn-solid:hover {
+        background: var(--paper);
+        transform: translateY(-2px);
+      }
+      .btn-ghost {
+        border-color: var(--line-dark);
+        color: var(--paper);
+      }
+      .btn-ghost:hover {
+        border-color: var(--sage-bright);
+        color: var(--sage-bright);
+      }
+      .btn-dark {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .btn-dark:hover {
+        background: var(--moss);
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: 0;
+        padding: 6px;
+      }
+      .hamburger span {
+        width: 22px;
+        height: 1.5px;
+        background: var(--paper);
+      }
+
+      /* ---------- hero ---------- */
+      #home {
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        background: var(--ink);
+        position: relative;
+        overflow: hidden;
+        padding-top: 110px;
+      }
+      #home .bg-photo {
+        position: absolute;
+        inset: 0;
+      }
+      #home .bg-photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          100deg,
+          var(--ink) 22%,
+          rgba(11, 15, 12, 0.75) 55%,
+          rgba(11, 15, 12, 0.35) 100%
+        );
+      }
+      #home .glow {
+        position: absolute;
+        width: 640px;
+        height: 640px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(169, 201, 160, 0.16),
+          transparent 70%
+        );
+        top: -180px;
+        right: -160px;
+        filter: blur(10px);
+        pointer-events: none;
+      }
+      .hero-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.35fr 0.85fr;
+        gap: 60px;
+        align-items: end;
+        padding-bottom: 90px;
+      }
+      .eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--sage-bright);
+        margin-bottom: 22px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 26px;
+        height: 1px;
+        background: var(--sage-bright);
+      }
+      h1.hero-title {
+        color: var(--paper);
+        font-size: clamp(42px, 6.2vw, 84px);
+        line-height: 0.98;
+        font-weight: 400;
+      }
+      h1.hero-title em {
+        font-style: italic;
+        color: var(--sage-bright);
+      }
+      .hero-sub {
+        color: var(--muted-dark);
+        font-size: 17px;
+        max-width: 480px;
+        margin: 26px 0 38px;
+        line-height: 1.6;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .next-slot {
+        width: 100%;
+        padding: 26px 24px;
+        color: var(--paper);
+      }
+      .next-slot .serial {
+        margin-bottom: 14px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .next-slot h3 {
+        font-size: 26px;
+        color: var(--paper);
+      }
+      .slot-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-top: 1px dashed var(--line-dark);
+        font-size: 13.5px;
+        color: var(--muted-dark);
+      }
+      .slot-row b {
+        color: var(--paper);
+        font-weight: 600;
+      }
+
+      .marquee-strip {
+        background: var(--sage-bright);
+        overflow: hidden;
+        padding: 13px 0;
+        border-top: 1px solid var(--ink);
+        border-bottom: 1px solid var(--ink);
+      }
+      .marquee-track {
+        display: flex;
+        gap: 44px;
+        white-space: nowrap;
+        animation: mq 26s linear infinite;
+        width: max-content;
+      }
+      .marquee-track span {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 44px;
+      }
+      @keyframes mq {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ---------- section headers ---------- */
+      .sec-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 40px;
+        margin-bottom: 60px;
+        flex-wrap: wrap;
+      }
+      .sec-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .tag-light {
+        color: var(--moss);
+      }
+      .tag-dark {
+        color: var(--sage-bright);
+      }
+      .sec-title {
+        font-size: clamp(30px, 4vw, 46px);
+      }
+      .sec-desc {
+        max-width: 340px;
+        font-size: 14.5px;
+        line-height: 1.6;
+      }
+      .desc-light {
+        color: var(--muted-light);
+      }
+      .desc-dark {
+        color: var(--muted-dark);
+      }
+
+      section.pad {
+        padding: 120px 0;
+      }
+
+      /* ---------- sobre ---------- */
+      #sobre {
+        background: var(--paper);
+      }
+      .sobre-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 70px;
+        align-items: center;
+      }
+      .sobre-photo {
+        aspect-ratio: 4/5;
+        border-radius: 2px;
+      }
+      .stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line-light);
+        margin-top: 46px;
+        border: 1px solid var(--line-light);
+      }
+      .stat {
+        background: var(--paper);
+        padding: 22px 6px;
+        text-align: center;
+      }
+      .stat .n {
+        font-family: "Fraunces", serif;
+        font-size: 32px;
+        color: var(--moss);
+      }
+      .stat .l {
+        font-size: 11px;
+        color: var(--muted-light);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 6px;
+      }
+      .sobre-copy p {
+        color: var(--muted-light);
+        line-height: 1.75;
+        font-size: 15px;
+        margin: 0 0 18px;
+      }
+      .values {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 26px;
+      }
+      .value-pill {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.05em;
+        padding: 8px 14px;
+        border: 1px solid var(--line-light);
+        border-radius: 20px;
+        color: var(--moss);
+        text-transform: uppercase;
+      }
+
+      /* ---------- servicos ---------- */
+      #servicos {
+        background: var(--ink);
+      }
+      .serv-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+      .serv-card {
+        padding: 30px 26px 26px;
+        transition:
+          transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+          border-color 0.4s;
+      }
+      .serv-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--sage-bright);
+      }
+      .serv-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 26px;
+      }
+      .serv-icon {
+        width: 38px;
+        height: 38px;
+        color: var(--sage-bright);
+      }
+      .serv-card h3 {
+        color: var(--paper);
+        font-size: 21px;
+        margin-bottom: 8px;
+      }
+      .serv-desc {
+        color: var(--muted-dark);
+        font-size: 13.5px;
+        line-height: 1.6;
+        margin-bottom: 22px;
+        min-height: 42px;
+      }
+      .serv-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px dashed var(--line-dark);
+        padding-top: 18px;
+      }
+      .serv-price {
+        font-family: "Fraunces", serif;
+        font-size: 24px;
+        color: var(--sage-bright);
+      }
+      .serv-time {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--muted-dark);
+      }
+      .serv-link {
+        font-size: 11.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--paper);
+        border-bottom: 1px solid var(--sage-bright);
+        padding-bottom: 2px;
+      }
+
+      /* ---------- galeria ---------- */
+      #galeria {
+        background: var(--paper);
+      }
+      .gal-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 36px;
+      }
+      .gal-tab {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 9px 16px;
+        border: 1px solid var(--line-light);
+        border-radius: 20px;
+        color: var(--muted-light);
+        cursor: pointer;
+        background: transparent;
+        transition: 0.3s;
+      }
+      .gal-tab.active,
+      .gal-tab:hover {
+        background: var(--ink);
+        color: var(--paper);
+        border-color: var(--ink);
+      }
+      .gal-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 190px;
+        gap: 14px;
+      }
+      .gal-item {
+        position: relative;
+        border-radius: 2px;
+        cursor: pointer;
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      .gal-item.big {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+      .gal-item .g-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        padding: 16px;
+        opacity: 0;
+        transition: opacity 0.35s;
+        background: linear-gradient(
+          0deg,
+          rgba(11, 15, 12, 0.65),
+          transparent 55%
+        );
+        z-index: 2;
+      }
+      .gal-item:hover .g-overlay {
+        opacity: 1;
+      }
+      .g-overlay span {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--sage-bright);
+      }
+
+      /* ---------- produtos ---------- */
+      #produtos {
+        background: var(--paper-dim);
+      }
+      .prod-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .prod-card {
+        overflow: hidden;
+      }
+      .prod-photo {
+        aspect-ratio: 1;
+      }
+      .prod-body {
+        padding: 18px 18px 20px;
+      }
+      .prod-cat {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--moss);
+      }
+      .prod-name {
+        font-size: 16px;
+        margin: 8px 0 10px;
+        font-family: "Fraunces", serif;
+      }
+      .prod-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 14px;
+        border-top: 1px dashed var(--line-light);
+      }
+      .prod-price {
+        font-family: "Fraunces", serif;
+        font-size: 19px;
+        color: var(--moss);
+      }
+      .prod-buy {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--paper);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s;
+        cursor: pointer;
+        border: 0;
+      }
+      .prod-buy:hover {
+        background: var(--moss);
+      }
+
+      /* ---------- equipe ---------- */
+      #equipe {
+        background: var(--ink);
+      }
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .team-photo {
+        aspect-ratio: 3/4;
+      }
+      .team-body {
+        padding: 20px 18px;
+      }
+      .team-body h3 {
+        color: var(--paper);
+        font-size: 19px;
+        margin-bottom: 4px;
+      }
+      .team-spec {
+        color: var(--sage-bright);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .team-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px dashed var(--line-dark);
+        padding-top: 14px;
+      }
+      .team-exp {
+        font-size: 12px;
+        color: var(--muted-dark);
+      }
+      .team-ig {
+        color: var(--paper);
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* ---------- avaliacoes ---------- */
+      #avaliacoes {
+        background: var(--paper);
+      }
+      .rev-track-wrap {
+        overflow: hidden;
+      }
+      .rev-track {
+        display: flex;
+        transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .rev-slide {
+        min-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+      .rev-card {
+        padding: 28px;
+      }
+      .stars {
+        color: var(--moss);
+        font-size: 14px;
+        letter-spacing: 2px;
+        margin-bottom: 16px;
+      }
+      .rev-text {
+        font-size: 14.5px;
+        color: var(--muted-light);
+        line-height: 1.7;
+        margin-bottom: 22px;
+        min-height: 80px;
+      }
+      .rev-who {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .rev-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      .rev-name {
+        font-size: 13.5px;
+        font-weight: 700;
+      }
+      .rev-loc {
+        font-size: 11.5px;
+        color: var(--muted-light);
+      }
+      .rev-dots {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 36px;
+      }
+      .rev-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--line-light);
+        cursor: pointer;
+        border: 0;
+        padding: 0;
+      }
+      .rev-dot.active {
+        background: var(--moss);
+        width: 22px;
+        border-radius: 5px;
+        transition: 0.3s;
+      }
+
+      /* ---------- agendamento ---------- */
+      #agendar {
+        background: var(--moss);
+        position: relative;
+        overflow: hidden;
+      }
+      #agendar::before {
+        content: "";
+        position: absolute;
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(
+          circle,
+          rgba(169, 201, 160, 0.22),
+          transparent 70%
+        );
+        top: -100px;
+        left: -120px;
+      }
+      .book-grid {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 60px;
+        align-items: start;
+        position: relative;
+        z-index: 2;
+      }
+      .book-copy h2 {
+        color: var(--paper);
+      }
+      .book-copy p {
+        color: rgba(247, 246, 241, 0.75);
+        font-size: 15px;
+        line-height: 1.7;
+        margin-top: 18px;
+        max-width: 400px;
+      }
+      .book-list {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .book-list li {
+        list-style: none;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        color: var(--paper);
+        font-size: 13.5px;
+      }
+      .book-list .num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--sage-bright);
+        border: 1px solid rgba(169, 201, 160, 0.4);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .book-form {
+        padding: 34px;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 16px;
+      }
+      .field.full {
+        grid-column: 1/-1;
+      }
+      .field label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted-dark);
+      }
+      .field select,
+      .field input,
+      .field textarea {
+        background: transparent;
+        border: 1px solid var(--line-dark);
+        color: var(--paper);
+        padding: 12px 12px;
+        font-family: "Manrope", sans-serif;
+        font-size: 14px;
+        border-radius: 2px;
+        outline: none;
+        transition: 0.3s;
+      }
+      .field select option {
+        background: var(--ink);
+      }
+      .field select:focus,
+      .field input:focus,
+      .field textarea:focus {
+        border-color: var(--sage-bright);
+      }
+      .field textarea {
+        resize: vertical;
+        min-height: 70px;
+      }
+      .book-submit {
+        width: 100%;
+        justify-content: center;
+        margin-top: 6px;
+      }
+      .success-panel {
+        display: none;
+        text-align: center;
+        padding: 20px 10px;
+      }
+      .success-panel.show {
+        display: block;
+      }
+      .success-panel .stamp {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: 1.5px solid var(--sage-bright);
+        color: var(--sage-bright);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 18px;
+      }
+      .success-panel h3 {
+        color: var(--paper);
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+      .success-panel p {
+        color: var(--muted-dark);
+        font-size: 13.5px;
+      }
+      .success-panel .tk {
+        font-family: "JetBrains Mono", monospace;
+        color: var(--sage-bright);
+        margin-top: 14px;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+      }
+      .form-status {
+        display: none;
+        margin-top: 14px;
+        font-size: 12.5px;
+        line-height: 1.5;
+        padding: 11px 12px;
+        border: 1px solid transparent;
+      }
+      .form-status.error {
+        display: block;
+        background: rgba(255, 255, 255, 0.06);
+        color: #f6c9c9;
+        border-color: rgba(246, 201, 201, 0.4);
+      }
+      .form-status.success {
+        display: block;
+        background: rgba(169, 201, 160, 0.09);
+        color: var(--sage-bright);
+        border-color: rgba(169, 201, 160, 0.4);
+      }
+
+      /* ---------- faq ---------- */
+      #faq {
+        background: var(--paper);
+      }
+      .faq-list {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        border-top: 1px solid var(--line-light);
+      }
+      .faq-item:last-child {
+        border-bottom: 1px solid var(--line-light);
+      }
+      .faq-q {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 4px;
+        cursor: pointer;
+      }
+      .faq-q h4 {
+        font-size: 16px;
+        font-weight: 600;
+        font-family: "Manrope", sans-serif;
+      }
+      .faq-plus {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 20px;
+        color: var(--moss);
+        transition: transform 0.35s;
+        flex-shrink: 0;
+        margin-left: 20px;
+      }
+      .faq-item.open .faq-plus {
+        transform: rotate(45deg);
+      }
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .faq-a p {
+        color: var(--muted-light);
+        font-size: 14px;
+        line-height: 1.7;
+        padding-bottom: 24px;
+        padding-right: 40px;
+      }
+
+      /* ---------- contato ---------- */
+      #contato {
+        background: var(--ink);
+      }
+      .cont-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        border: 1px solid var(--line-dark);
+      }
+      .cont-info {
+        padding: 50px;
+      }
+      .cont-info h2 {
+        color: var(--paper);
+        margin-bottom: 26px;
+      }
+      .cont-row {
+        display: flex;
+        gap: 14px;
+        padding: 16px 0;
+        border-top: 1px dashed var(--line-dark);
+      }
+      .cont-row:first-of-type {
+        border-top: none;
+      }
+      .cont-row .k {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10.5px;
+        text-transform: uppercase;
+        color: var(--sage-bright);
+        letter-spacing: 0.08em;
+        width: 110px;
+        flex-shrink: 0;
+        padding-top: 2px;
+      }
+      .cont-row .v {
+        color: var(--muted-dark);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .cont-map {
+        background: var(--ink-soft);
+        position: relative;
+        min-height: 340px;
+      }
+      .cont-map iframe {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0;
+        border: 0;
+        filter: grayscale(1) invert(92%) contrast(90%);
+      }
+
+      /* ---------- footer ---------- */
+      footer {
+        background: var(--ink);
+        border-top: 1px solid var(--line-dark);
+        padding: 70px 0 26px;
+      }
+      .foot-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+      .foot-brand p {
+        color: var(--muted-dark);
+        font-size: 13.5px;
+        line-height: 1.7;
+        margin: 18px 0 22px;
+        max-width: 280px;
+      }
+      .foot-social {
+        display: flex;
+        gap: 10px;
+      }
+      .soc {
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--line-dark);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--paper);
+        transition: 0.3s;
+      }
+      .soc:hover {
+        border-color: var(--sage-bright);
+        color: var(--sage-bright);
+      }
+      .foot-col h5 {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--sage-bright);
+        margin-bottom: 18px;
+      }
+      .foot-col a {
+        display: block;
+        color: var(--muted-dark);
+        font-size: 13.5px;
+        margin-bottom: 12px;
+        transition: 0.3s;
+      }
+      .foot-col a:hover {
+        color: var(--paper);
+      }
+      .foot-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 26px;
+        border-top: 1px solid var(--line-dark);
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .foot-bottom span {
+        font-size: 12px;
+        color: var(--muted-dark);
+      }
+
+      /* ---------- mobile ---------- */
+      .mobile-nav {
+        position: fixed;
+        inset: 0;
+        background: var(--ink);
+        z-index: 150;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 40px 32px;
+        gap: 22px;
+        transform: translateY(-100%);
+        transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .mobile-nav.open {
+        transform: translateY(0);
+      }
+      .mobile-nav a {
+        font-family: "Fraunces", serif;
+        font-size: 30px;
+        color: var(--paper);
+      }
+      .mobile-close {
+        position: absolute;
+        top: 24px;
+        right: 28px;
+        background: none;
+        border: 0;
+        color: var(--paper);
+        font-size: 28px;
+        cursor: pointer;
+      }
+
+      @media (max-width: 1080px) {
+        .serv-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .prod-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .team-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .gal-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .rev-slide {
+          grid-template-columns: 1fr;
+        }
+        .foot-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .book-grid,
+        .sobre-grid,
+        .cont-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 720px) {
+        nav.links,
+        .hamburger + .btn-ghost {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        section.pad {
+          padding: 80px 0;
+        }
+        .serv-grid,
+        .prod-grid,
+        .team-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .gal-grid {
+          grid-template-columns: repeat(2, 1fr);
+          grid-auto-rows: 150px;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .cont-info {
+          padding: 30px;
+        }
+      }
+      @media (max-width: 480px) {
+        .serv-grid,
+        .prod-grid,
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <header id="siteHeader">
+      <div class="wrap nav-row">
+        <a href="#home" class="logo">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <circle
+              cx="15"
+              cy="15"
+              r="14"
+              stroke="currentColor"
+              stroke-width="1"
+            />
+            <path
+              d="M9 9L21 21M21 9L9 21"
+              stroke="currentColor"
+              stroke-width="1"
+            />
+            <path d="M15 6V24" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+          <span class="logo-word">Dio-<b>Salaon</b></span>
+        </a>
+        <nav class="links">
+          <a href="#sobre">Sobre</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#galeria">Galeria</a>
+          <a href="#produtos">Produtos</a>
+          <a href="#equipe">Equipe</a>
+          <a href="#avaliacoes">Avaliações</a>
+          <a href="#contato">Contato</a>
+        </nav>
+        <div style="display: flex; gap: 12px; align-items: center">
+          <a href="#" class="btn btn-ghost" style="padding: 11px 18px">Login</a>
+          <a href="#agendar" class="btn btn-solid">Agendar</a>
+          <button class="hamburger" id="hamBtn" aria-label="Abrir menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-nav" id="mobileNav">
+      <button class="mobile-close" id="mobileClose">&times;</button>
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#agendar">Agendar</a>
+      <a href="#contato">Contato</a>
+    </div>
+
+    <!-- ================= HERO ================= -->
+    <section id="home">
+      <div class="bg-photo duotone">
+        <img
+          src="https://picsum.photos/seed/dio-hero-x9/1800/1100"
+          alt="Barbearia Dio-Salaon"
+        />
+      </div>
+      <div class="glow"></div>
+      <div class="wrap hero-grid">
+        <div class="rv vis">
+          <span class="eyebrow">Barbearia Premium · Est. 2015</span>
+          <h1 class="hero-title">O Seu Estilo<br /><em>Começa</em> Aqui.</h1>
+          <p class="hero-sub">
+            Cortes modernos, atendimento premium e experiência única — onde
+            precisão de navalha encontra hospitalidade de verdade.
+          </p>
+          <div class="hero-actions">
+            <a href="#agendar" class="btn btn-solid">Agendar Agora</a>
+            <a href="#servicos" class="btn btn-ghost"
+              >Conheça Nossos Serviços</a
+            >
+          </div>
+        </div>
+        <div class="ticket ticket-dark next-slot rv vis rv-2">
+          <div class="serial serial-dark">
+            <span>Ticket Nº 014</span><span id="todayDate"></span>
+          </div>
+          <h3>Próximo horário disponível</h3>
+          <div class="slot-row"><span>Barbeiro</span><b>Diego Martins</b></div>
+          <div class="slot-row"><span>Serviço</span><b>Corte + Barba</b></div>
+          <div class="slot-row"><span>Horário</span><b>Hoje · 17:30</b></div>
+          <a
+            href="#agendar"
+            class="btn btn-solid"
+            style="width: 100%; justify-content: center; margin-top: 20px"
+            >Reservar Vaga</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee-strip">
+      <div class="marquee-track">
+        <span
+          >★ +12.000 CORTES REALIZADOS &nbsp;&nbsp;•&nbsp;&nbsp; AVALIAÇÃO 4.9/5
+          &nbsp;&nbsp;•&nbsp;&nbsp; ATENDIMENTO COM HORA MARCADA
+          &nbsp;&nbsp;•&nbsp;&nbsp; PRODUTOS PREMIUM &nbsp;&nbsp;•&nbsp;&nbsp;
+          DESDE 2015</span
+        >
+        <span
+          >★ +12.000 CORTES REALIZADOS &nbsp;&nbsp;•&nbsp;&nbsp; AVALIAÇÃO 4.9/5
+          &nbsp;&nbsp;•&nbsp;&nbsp; ATENDIMENTO COM HORA MARCADA
+          &nbsp;&nbsp;•&nbsp;&nbsp; PRODUTOS PREMIUM &nbsp;&nbsp;•&nbsp;&nbsp;
+          DESDE 2015</span
+        >
+      </div>
+    </div>
+
+    <!-- ================= SOBRE ================= -->
+    <section id="sobre" class="pad">
+      <div class="wrap sobre-grid">
+        <div class="duotone sobre-photo rv">
+          <img
+            src="https://picsum.photos/seed/dio-sobre-7/900/1100"
+            alt="Interior da barbearia"
+          />
+        </div>
+        <div class="sobre-copy rv rv-1">
+          <span class="sec-tag tag-light">Sobre a casa</span>
+          <h2 class="sec-title" style="margin-bottom: 22px">
+            Tradição de barbearia,<br />padrão de ateliê.
+          </h2>
+          <p>
+            A Dio-Salaon nasceu da vontade de reunir, sob um mesmo teto, a
+            técnica clássica da navalha e uma experiência de atendimento que não
+            existia na cidade: silenciosa, precisa e sem pressa.
+          </p>
+          <p>
+            Cada visita é conduzida como um ritual — da consulta inicial ao
+            acabamento final — para que o cliente saia não apenas com um corte
+            novo, mas com a confiança de quem sabe exatamente como quer se
+            apresentar ao mundo.
+          </p>
+          <div class="values">
+            <span class="value-pill">Precisão</span>
+            <span class="value-pill">Hospitalidade</span>
+            <span class="value-pill">Consistência</span>
+            <span class="value-pill">Discrição</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat">
+              <div class="n">10+</div>
+              <div class="l">Anos de casa</div>
+            </div>
+            <div class="stat">
+              <div class="n">6</div>
+              <div class="l">Barbeiros</div>
+            </div>
+            <div class="stat">
+              <div class="n">4.9</div>
+              <div class="l">Nota média</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICOS ================= -->
+    <section id="servicos" class="pad">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <div>
+            <span class="sec-tag tag-dark">Serviços</span>
+            <h2 class="sec-title" style="color: var(--paper)">
+              O cardápio da casa.
+            </h2>
+          </div>
+          <p class="sec-desc desc-dark">
+            Seis serviços centrais, executados com a mesma régua de qualidade —
+            do clássico ao contemporâneo.
+          </p>
+        </div>
+        <div class="serv-grid">
+          <!-- card template repeated -->
+          <div class="ticket ticket-dark serv-card rv rv-1">
+            <div class="serv-top">
+              <svg
+                class="serv-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.3"
+              >
+                <circle cx="6" cy="6" r="2.6" />
+                <circle cx="6" cy="18" r="2.6" />
+                <path d="M8.2 8L19 19M8.2 16L19 5M9 12h8" />
+              </svg>
+              <span class="serial serial-dark">Nº 01</span>
+            </div>
+            <h3>Corte Tradicional</h3>
+            <p class="serv-desc">
+              Corte na tesoura ou máquina, com acabamento clássico e navalhado
+              nos contornos.
+            </p>
+            <div class="serv-foot">
+              <span class="serv-price">R$ 55</span
+              ><span class="serv-time">≈ 40 min</span>
+            </div>
+            <a
+              href="#agendar"
+              class="serv-link"
+              style="display: inline-block; margin-top: 16px"
+              >Agendar →</a
+            >
+          </div>
+          <div class="ticket ticket-dark serv-card rv rv-2">
+            <div class="serv-top">
+              <svg
+                class="serv-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.3"
+              >
+                <path d="M4 12h11M11 8l4 4-4 4M18 6v12" />
+              </svg>
+              <span class="serial serial-dark">Nº 02</span>
+            </div>
+            <h3>Degradê</h3>
+            <p class="serv-desc">
+              Fade progressivo com transição perfeita entre as máquinas e a
+              tesoura.
+            </p>
+            <div class="serv-foot">
+              <span class="serv-price">R$ 65</span
+              ><span class="serv-time">≈ 45 min</span>
+            </div>
+            <a
+              href="#agendar"
+              class="serv-link"
+              style="display: inline-block; margin-top: 16px"
+              >Agendar →</a
+            >
+          </div>
+          <div class="ticket ticket-dark serv-card rv rv-3">
+            <div class="serv-top">
+              <svg
+                class="serv-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.3"
+              >
+                <path d="M5 14c0-5 3-9 7-9s7 4 7 9-3 6-7 6-7-1-7-6Z" />
+              </svg>
+              <span class="serial serial-dark">Nº 03</span>
+            </div>
+            <h3>Barba</h3>
+            <p class="serv-desc">
+              Desenho, toalha quente e navalha para uma barba alinhada e macia.
+            </p>
+            <div class="serv-foot">
+              <span class="serv-price">R$ 45</span
+              ><span class="serv-time">≈ 30 min</span>
+            </div>
+            <a
+              href="#agendar"
+              class="serv-link"
+              style="display: inline-block; margin-top: 16px"
+              >Agendar →</a
+            >
+          </div>
+          <div class="ticket ticket-dark serv-card rv rv-1">
+            <div class="serv-top">
+              <svg
+                class="serv-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.3"
+              >
+                <path d="M4 20 20 4M9 4h11v11" />
+              </svg>
+              <span class="serial serial-dark">Nº 04</span>
+            </div>
+            <h3>Pigmentação</h3>
+            <p class="serv-desc">
+              Correção de falhas e uniformização de tom para barba e cabelo.
+            </p>
+            <div class="serv-foot">
+              <span class="serv-price">R$ 70</span
+              ><span class="serv-time">≈ 35 min</span>
+            </div>
+            <a
+              href="#agendar"
+              class="serv-link"
+              style="display: inline-block; margin-top: 16px"
+              >Agendar →</a
+            >
+          </div>
+          <div class="ticket ticket-dark serv-card rv rv-2">
+            <div class="serv-top">
+              <svg
+                class="serv-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.3"
+              >
+                <path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" />
+              </svg>
+              <span class="serial serial-dark">Nº 05</span>
+            </div>
+            <h3>Sobrancelha</h3>
+            <p class="serv-desc">
+              Design na navalha ou pinça, respeitando o formato natural do
+              olhar.
+            </p>
+            <div class="serv-foot">
+              <span class="serv-price">R$ 25</span
+              ><span class="serv-time">≈ 15 min</span>
+            </div>
+            <a
+              href="#agendar"
+              class="serv-link"
+              style="display: inline-block; margin-top: 16px"
+              >Agendar →</a
+            >
+          </div>
+          <div class="ticket ticket-dark serv-card rv rv-3">
+            <div class="serv-top">
+              <svg
+                class="serv-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.3"
+              >
+                <circle cx="12" cy="12" r="8" />
+                <path d="M12 8v4l3 2" />
+              </svg>
+              <span class="serial serial-dark">Nº 06</span>
+            </div>
+            <h3>Combo Corte + Barba</h3>
+            <p class="serv-desc">
+              O ritual completo — corte, barba e acabamento em uma única sessão.
+            </p>
+            <div class="serv-foot">
+              <span class="serv-price">R$ 90</span
+              ><span class="serv-time">≈ 70 min</span>
+            </div>
+            <a
+              href="#agendar"
+              class="serv-link"
+              style="display: inline-block; margin-top: 16px"
+              >Agendar →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GALERIA ================= -->
+    <section id="galeria" class="pad">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <div>
+            <span class="sec-tag tag-light">Galeria</span>
+            <h2 class="sec-title">Cortes que falam por si.</h2>
+          </div>
+          <p class="sec-desc desc-light">
+            Um recorte do nosso trabalho, tratado em preto e branco com toque
+            sage — nossa assinatura visual.
+          </p>
+        </div>
+        <div class="gal-tabs">
+          <button class="gal-tab active" data-f="todos">Todos</button>
+          <button class="gal-tab" data-f="degrade">Degradê</button>
+          <button class="gal-tab" data-f="social">Social</button>
+          <button class="gal-tab" data-f="barba">Barba</button>
+          <button class="gal-tab" data-f="infantil">Infantil</button>
+          <button class="gal-tab" data-f="navalhado">Navalhado</button>
+        </div>
+        <div class="gal-grid" id="galGrid">
+          <div class="gal-item big duotone" data-c="degrade">
+            <img
+              src="https://picsum.photos/seed/dio-g1/900/900"
+              alt="Degradê"
+            />
+            <div class="g-overlay"><span>Degradê</span></div>
+          </div>
+          <div class="gal-item duotone" data-c="barba">
+            <img src="https://picsum.photos/seed/dio-g2/500/500" alt="Barba" />
+            <div class="g-overlay"><span>Barba</span></div>
+          </div>
+          <div class="gal-item duotone" data-c="social">
+            <img src="https://picsum.photos/seed/dio-g3/500/500" alt="Social" />
+            <div class="g-overlay"><span>Social</span></div>
+          </div>
+          <div class="gal-item duotone" data-c="navalhado">
+            <img
+              src="https://picsum.photos/seed/dio-g4/500/500"
+              alt="Navalhado"
+            />
+            <div class="g-overlay"><span>Navalhado</span></div>
+          </div>
+          <div class="gal-item duotone" data-c="infantil">
+            <img
+              src="https://picsum.photos/seed/dio-g5/500/500"
+              alt="Infantil"
+            />
+            <div class="g-overlay"><span>Infantil</span></div>
+          </div>
+          <div class="gal-item duotone" data-c="degrade">
+            <img
+              src="https://picsum.photos/seed/dio-g6/500/500"
+              alt="Degradê"
+            />
+            <div class="g-overlay"><span>Degradê</span></div>
+          </div>
+          <div class="gal-item duotone" data-c="barba">
+            <img src="https://picsum.photos/seed/dio-g7/500/500" alt="Barba" />
+            <div class="g-overlay"><span>Barba</span></div>
+          </div>
+          <div class="gal-item duotone" data-c="social">
+            <img src="https://picsum.photos/seed/dio-g8/500/500" alt="Social" />
+            <div class="g-overlay"><span>Social</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRODUTOS ================= -->
+    <section id="produtos" class="pad">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <div>
+            <span class="sec-tag tag-light">Loja</span>
+            <h2 class="sec-title">
+              Produtos para continuar o cuidado em casa.
+            </h2>
+          </div>
+          <p class="sec-desc desc-light">
+            Linha selecionada de pomadas, óleos e ferramentas usadas aqui
+            dentro.
+          </p>
+        </div>
+        <div class="prod-grid">
+          <div class="ticket prod-card rv rv-1">
+            <div class="duotone prod-photo">
+              <img
+                src="https://picsum.photos/seed/dio-p1/500/500"
+                alt="Pomada Matte"
+              />
+            </div>
+            <div class="prod-body">
+              <span class="prod-cat">Styling</span>
+              <h4 class="prod-name">Pomada Matte</h4>
+              <div class="prod-foot">
+                <span class="prod-price">R$ 48</span
+                ><button class="prod-buy" aria-label="Comprar">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="ticket prod-card rv rv-2">
+            <div class="duotone prod-photo">
+              <img
+                src="https://picsum.photos/seed/dio-p2/500/500"
+                alt="Óleo para Barba"
+              />
+            </div>
+            <div class="prod-body">
+              <span class="prod-cat">Barba</span>
+              <h4 class="prod-name">Óleo para Barba</h4>
+              <div class="prod-foot">
+                <span class="prod-price">R$ 39</span
+                ><button class="prod-buy" aria-label="Comprar">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="ticket prod-card rv rv-3">
+            <div class="duotone prod-photo">
+              <img
+                src="https://picsum.photos/seed/dio-p3/500/500"
+                alt="Navalha de Aço"
+              />
+            </div>
+            <div class="prod-body">
+              <span class="prod-cat">Ferramentas</span>
+              <h4 class="prod-name">Navalha de Aço</h4>
+              <div class="prod-foot">
+                <span class="prod-price">R$ 189</span
+                ><button class="prod-buy" aria-label="Comprar">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="ticket prod-card rv rv-4">
+            <div class="duotone prod-photo">
+              <img
+                src="https://picsum.photos/seed/dio-p4/500/500"
+                alt="Shampoo Anticaspa"
+              />
+            </div>
+            <div class="prod-body">
+              <span class="prod-cat">Cuidados</span>
+              <h4 class="prod-name">Shampoo Anticaspa</h4>
+              <div class="prod-foot">
+                <span class="prod-price">R$ 42</span
+                ><button class="prod-buy" aria-label="Comprar">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EQUIPE ================= -->
+    <section id="equipe" class="pad">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <div>
+            <span class="sec-tag tag-dark">Equipe</span>
+            <h2 class="sec-title" style="color: var(--paper)">
+              Quem segura a navalha.
+            </h2>
+          </div>
+          <p class="sec-desc desc-dark">
+            Barbeiros com especialidades distintas — escolha por afinidade de
+            estilo.
+          </p>
+        </div>
+        <div class="team-grid">
+          <div class="ticket ticket-dark rv rv-1">
+            <div class="duotone team-photo">
+              <img
+                src="https://picsum.photos/seed/dio-t1/500/650"
+                alt="Diego Martins"
+              />
+            </div>
+            <div class="team-body">
+              <h3>Diego Martins</h3>
+              <span class="team-spec">Degradê & Navalhado</span>
+              <div class="team-meta">
+                <span class="team-exp">9 anos</span
+                ><a href="#" class="team-ig">@diego.barber</a>
+              </div>
+              <a
+                href="#agendar"
+                class="btn btn-ghost"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  margin-top: 16px;
+                  padding: 10px;
+                "
+                >Agendar</a
+              >
+            </div>
+          </div>
+          <div class="ticket ticket-dark rv rv-2">
+            <div class="duotone team-photo">
+              <img
+                src="https://picsum.photos/seed/dio-t2/500/650"
+                alt="Rafael Souza"
+              />
+            </div>
+            <div class="team-body">
+              <h3>Rafael Souza</h3>
+              <span class="team-spec">Barba & Pigmentação</span>
+              <div class="team-meta">
+                <span class="team-exp">7 anos</span
+                ><a href="#" class="team-ig">@rafa.souza</a>
+              </div>
+              <a
+                href="#agendar"
+                class="btn btn-ghost"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  margin-top: 16px;
+                  padding: 10px;
+                "
+                >Agendar</a
+              >
+            </div>
+          </div>
+          <div class="ticket ticket-dark rv rv-3">
+            <div class="duotone team-photo">
+              <img
+                src="https://picsum.photos/seed/dio-t3/500/650"
+                alt="Bruno Alves"
+              />
+            </div>
+            <div class="team-body">
+              <h3>Bruno Alves</h3>
+              <span class="team-spec">Cortes Clássicos</span>
+              <div class="team-meta">
+                <span class="team-exp">12 anos</span
+                ><a href="#" class="team-ig">@bruno.alves</a>
+              </div>
+              <a
+                href="#agendar"
+                class="btn btn-ghost"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  margin-top: 16px;
+                  padding: 10px;
+                "
+                >Agendar</a
+              >
+            </div>
+          </div>
+          <div class="ticket ticket-dark rv rv-4">
+            <div class="duotone team-photo">
+              <img
+                src="https://picsum.photos/seed/dio-t4/500/650"
+                alt="Kaique Lima"
+              />
+            </div>
+            <div class="team-body">
+              <h3>Kaique Lima</h3>
+              <span class="team-spec">Infantil & Social</span>
+              <div class="team-meta">
+                <span class="team-exp">5 anos</span
+                ><a href="#" class="team-ig">@kaique.lima</a>
+              </div>
+              <a
+                href="#agendar"
+                class="btn btn-ghost"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  margin-top: 16px;
+                  padding: 10px;
+                "
+                >Agendar</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= AVALIACOES ================= -->
+    <section id="avaliacoes" class="pad">
+      <div class="wrap">
+        <div
+          class="sec-head rv"
+          style="
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+          "
+        >
+          <span class="sec-tag tag-light">Avaliações</span>
+          <h2 class="sec-title">O que dizem sobre a casa.</h2>
+        </div>
+        <div class="rev-track-wrap">
+          <div class="rev-track" id="revTrack">
+            <div class="rev-slide">
+              <div class="ticket rev-card">
+                <div class="stars">★★★★★</div>
+                <p class="rev-text">
+                  Atendimento impecável, ambiente muito bem cuidado e o corte
+                  ficou exatamente como pedi. Virei cliente fixo.
+                </p>
+                <div class="rev-who">
+                  <div class="duotone rev-avatar">
+                    <img src="https://picsum.photos/seed/dio-a1/100/100" />
+                  </div>
+                  <div>
+                    <div class="rev-name">Lucas Ferreira</div>
+                    <div class="rev-loc">Cliente há 2 anos</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ticket rev-card">
+                <div class="stars">★★★★★</div>
+                <p class="rev-text">
+                  A experiência mais próxima de um spa masculino que já tive.
+                  Vale cada centavo pela atenção aos detalhes.
+                </p>
+                <div class="rev-who">
+                  <div class="duotone rev-avatar">
+                    <img src="https://picsum.photos/seed/dio-a2/100/100" />
+                  </div>
+                  <div>
+                    <div class="rev-name">André Costa</div>
+                    <div class="rev-loc">Cliente há 8 meses</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ticket rev-card">
+                <div class="stars">★★★★★</div>
+                <p class="rev-text">
+                  Agendei pelo site em menos de um minuto e fui recebido no
+                  horário exato. Isso já diz muito sobre a casa.
+                </p>
+                <div class="rev-who">
+                  <div class="duotone rev-avatar">
+                    <img src="https://picsum.photos/seed/dio-a3/100/100" />
+                  </div>
+                  <div>
+                    <div class="rev-name">Thiago Nogueira</div>
+                    <div class="rev-loc">Cliente há 1 ano</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="rev-slide">
+              <div class="ticket rev-card">
+                <div class="stars">★★★★★</div>
+                <p class="rev-text">
+                  A barba nunca ficou tão bem desenhada. Recomendo o Rafael de
+                  olhos fechados.
+                </p>
+                <div class="rev-who">
+                  <div class="duotone rev-avatar">
+                    <img src="https://picsum.photos/seed/dio-a4/100/100" />
+                  </div>
+                  <div>
+                    <div class="rev-name">Felipe Rocha</div>
+                    <div class="rev-loc">Cliente há 3 anos</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ticket rev-card">
+                <div class="stars">★★★★★</div>
+                <p class="rev-text">
+                  Levei meu filho pela primeira vez e o cuidado com criança foi
+                  surpreendente. Já marcamos o próximo.
+                </p>
+                <div class="rev-who">
+                  <div class="duotone rev-avatar">
+                    <img src="https://picsum.photos/seed/dio-a5/100/100" />
+                  </div>
+                  <div>
+                    <div class="rev-name">Marcelo Dias</div>
+                    <div class="rev-loc">Cliente há 5 meses</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ticket rev-card">
+                <div class="stars">★★★★★</div>
+                <p class="rev-text">
+                  Produtos de qualidade de verdade — comprei a pomada e o óleo,
+                  ambos excelentes.
+                </p>
+                <div class="rev-who">
+                  <div class="duotone rev-avatar">
+                    <img src="https://picsum.photos/seed/dio-a6/100/100" />
+                  </div>
+                  <div>
+                    <div class="rev-name">Gustavo Lima</div>
+                    <div class="rev-loc">Cliente há 1 ano</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rev-dots" id="revDots"></div>
+      </div>
+    </section>
+
+    <!-- ================= AGENDAR ================= -->
+    <section id="agendar" class="pad">
+      <div class="wrap book-grid">
+        <div class="book-copy rv">
+          <span class="eyebrow" style="color: var(--sage-bright)"
+            >Reserva Online</span
+          >
+          <h2 class="sec-title">Marque seu horário em menos de um minuto.</h2>
+          <p>
+            Escolha o barbeiro, o serviço e o horário. Você recebe a confirmação
+            na hora — sem ligação, sem espera.
+          </p>
+          <ul class="book-list">
+            <li><span class="num">1</span> Escolha barbeiro e serviço</li>
+            <li>
+              <span class="num">2</span> Selecione data e horário disponíveis
+            </li>
+            <li><span class="num">3</span> Confirme seus dados e pronto</li>
+          </ul>
+        </div>
+
+        <div class="ticket ticket-dark book-form rv rv-1">
+          <form id="bookForm" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label>Barbeiro</label>
+                <select id="barbeiro" required>
+                  <option value="">Selecione</option>
+                  <option>Diego Martins</option>
+                  <option>Rafael Souza</option>
+                  <option>Bruno Alves</option>
+                  <option>Kaique Lima</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Serviço</label>
+                <select id="servico" required>
+                  <option value="">Selecione</option>
+                  <option>Corte Tradicional</option>
+                  <option>Degradê</option>
+                  <option>Barba</option>
+                  <option>Combo Corte + Barba</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Data</label
+                ><input id="dataAgendamento" type="date" required />
+              </div>
+              <div class="field">
+                <label>Horário</label
+                ><input id="horarioAgendamento" type="time" required />
+              </div>
+              <div class="field full">
+                <label>Nome completo</label
+                ><input
+                  id="nomeCliente"
+                  type="text"
+                  placeholder="Seu nome"
+                  required
+                />
+              </div>
+              <div class="field">
+                <label>Telefone</label
+                ><input
+                  id="telefoneCliente"
+                  type="tel"
+                  placeholder="(11) 99999-0000"
+                  required
+                />
+              </div>
+              <div class="field">
+                <label>E-mail</label
+                ><input
+                  id="emailCliente"
+                  type="email"
+                  placeholder="voce@email.com"
+                  required
+                />
+              </div>
+              <div class="field full">
+                <label>Observações</label
+                ><textarea
+                  id="obsCliente"
+                  placeholder="Alguma preferência ou observação?"
+                ></textarea>
+              </div>
+            </div>
+            <div class="form-status" id="formStatus" aria-live="polite"></div>
+            <button type="submit" class="btn btn-solid book-submit">
+              Confirmar Agendamento
+            </button>
+          </form>
+          <div class="success-panel" id="successPanel">
+            <div class="stamp">✓</div>
+            <h3>Agendamento confirmado</h3>
+            <p>
+              Enviamos os detalhes para o seu e-mail. Chegue com 10 minutos de
+              antecedência.
+            </p>
+            <div class="tk" id="tkNum"></div>
+            <button
+              class="btn btn-ghost"
+              style="margin-top: 22px"
+              id="resetForm"
+            >
+              Fazer novo agendamento
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq" class="pad">
+      <div class="wrap">
+        <div
+          class="sec-head rv"
+          style="
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+          "
+        >
+          <span class="sec-tag tag-light">Perguntas frequentes</span>
+          <h2 class="sec-title">Dúvidas comuns.</h2>
+        </div>
+        <div class="faq-list rv">
+          <div class="faq-item">
+            <div class="faq-q">
+              <h4>Preciso agendar com antecedência?</h4>
+              <span class="faq-plus">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                Recomendamos agendar com pelo menos 24h de antecedência,
+                especialmente para horários no fim de semana. Encaixes de última
+                hora dependem da disponibilidade do dia.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <h4>Posso escolher um barbeiro específico?</h4>
+              <span class="faq-plus">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                Sim. No formulário de agendamento você seleciona o profissional
+                de sua preferência antes de escolher data e horário.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <h4>Quais formas de pagamento são aceitas?</h4>
+              <span class="faq-plus">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                Aceitamos cartão de crédito, débito, Pix e dinheiro. O pagamento
+                é feito presencialmente após o atendimento.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <h4>Vocês atendem crianças?</h4>
+              <span class="faq-plus">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                Sim, temos um serviço dedicado ao público infantil, com
+                abordagem paciente e ambiente adaptado.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <h4>Como funciona o cancelamento?</h4>
+              <span class="faq-plus">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                Cancelamentos ou reagendamentos podem ser feitos com até 3h de
+                antecedência diretamente pelo WhatsApp da barbearia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTATO ================= -->
+    <section id="contato" class="pad">
+      <div class="wrap">
+        <div class="cont-grid">
+          <div class="cont-info rv">
+            <h2>Fale com a gente.</h2>
+            <div class="cont-row">
+              <span class="k">Endereço</span
+              ><span class="v"
+                >Rua das Palmeiras, 482 — Jardim América, São Paulo/SP</span
+              >
+            </div>
+            <div class="cont-row">
+              <span class="k">WhatsApp</span
+              ><span class="v">(11) 99887-1234</span>
+            </div>
+            <div class="cont-row">
+              <span class="k">Instagram</span><span class="v">@diosalaon</span>
+            </div>
+            <div class="cont-row">
+              <span class="k">Horário</span
+              ><span class="v">Terça a Sábado · 09h às 20h</span>
+            </div>
+            <div class="cont-row">
+              <span class="k">E-mail</span
+              ><span class="v">contato@diosalaon.com.br</span>
+            </div>
+            <a href="#" class="btn btn-solid" style="margin-top: 26px"
+              >Falar no WhatsApp</a
+            >
+          </div>
+          <div class="cont-map rv rv-1">
+            <iframe
+              src="https://www.google.com/maps?q=São+Paulo&output=embed"
+              loading="lazy"
+              title="Mapa"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+      <div class="wrap">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a href="#home" class="logo" style="color: var(--paper)">
+              <svg width="26" height="26" viewBox="0 0 30 30" fill="none">
+                <circle
+                  cx="15"
+                  cy="15"
+                  r="14"
+                  stroke="currentColor"
+                  stroke-width="1"
+                />
+                <path
+                  d="M9 9L21 21M21 9L9 21"
+                  stroke="currentColor"
+                  stroke-width="1"
+                />
+                <path d="M15 6V24" stroke="currentColor" stroke-width="1.5" />
+              </svg>
+              <span class="logo-word">Dio-<b>Salaon</b></span>
+            </a>
+            <p>
+              Barbearia premium dedicada à precisão, hospitalidade e estilo.
+              Todo cliente sai com um ticket, uma boa conversa e um corte à
+              altura.
+            </p>
+            <div class="foot-social">
+              <a href="#" class="soc" aria-label="Instagram">IG</a>
+              <a href="#" class="soc" aria-label="Facebook">FB</a>
+              <a href="#" class="soc" aria-label="WhatsApp">WA</a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h5>Navegação</h5>
+            <a href="#sobre">Sobre</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#equipe">Equipe</a>
+          </div>
+          <div class="foot-col">
+            <h5>Cliente</h5>
+            <a href="#agendar">Agendar</a>
+            <a href="#produtos">Loja</a>
+            <a href="#avaliacoes">Avaliações</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div class="foot-col">
+            <h5>Contato</h5>
+            <a href="#contato">Endereço</a>
+            <a href="#">WhatsApp</a>
+            <a href="#">contato@diosalaon.com.br</a>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 Dio-Salaon. Todos os direitos reservados.</span>
+          <span>Feito com precisão de navalha.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // header scroll state
+      const header = document.getElementById("siteHeader");
+      window.addEventListener("scroll", () => {
+        header.classList.toggle("scrolled", window.scrollY > 40);
+      });
+
+      // mobile nav
+      const hamBtn = document.getElementById("hamBtn");
+      const mobileNav = document.getElementById("mobileNav");
+      const mobileClose = document.getElementById("mobileClose");
+      hamBtn.addEventListener("click", () => mobileNav.classList.add("open"));
+      mobileClose.addEventListener("click", () =>
+        mobileNav.classList.remove("open"),
+      );
+      mobileNav
+        .querySelectorAll("a")
+        .forEach((a) =>
+          a.addEventListener("click", () => mobileNav.classList.remove("open")),
+        );
+      document.addEventListener("click", (event) => {
+        if (
+          !mobileNav.contains(event.target) &&
+          !hamBtn.contains(event.target) &&
+          mobileNav.classList.contains("open")
+        ) {
+          mobileNav.classList.remove("open");
+        }
+      });
+
+      // scroll reveal
+      const rvEls = document.querySelectorAll(".rv");
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("vis");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      rvEls.forEach((el) => io.observe(el));
+
+      // today date
+      document.getElementById("todayDate").textContent =
+        new Date().toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "short",
+        });
+
+      // gallery filter
+      const tabs = document.querySelectorAll(".gal-tab");
+      const items = document.querySelectorAll(".gal-item");
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+          const f = tab.dataset.f;
+          items.forEach((it) => {
+            it.style.display =
+              f === "todos" || it.dataset.c === f ? "" : "none";
+          });
+        });
+      });
+
+      // testimonial slider
+      const track = document.getElementById("revTrack");
+      const slides = track.children.length;
+      const dotsWrap = document.getElementById("revDots");
+      let idx = 0;
+      for (let i = 0; i < slides; i++) {
+        const d = document.createElement("button");
+        d.className = "rev-dot" + (i === 0 ? " active" : "");
+        d.addEventListener("click", () => goSlide(i));
+        dotsWrap.appendChild(d);
+      }
+      function goSlide(i) {
+        idx = i;
+        track.style.transform = `translateX(-${i * 100}%)`;
+        [...dotsWrap.children].forEach((d, j) =>
+          d.classList.toggle("active", j === i),
+        );
+      }
+      setInterval(() => goSlide((idx + 1) % slides), 5500);
+
+      // FAQ accordion
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        const q = item.querySelector(".faq-q");
+        const a = item.querySelector(".faq-a");
+        q.addEventListener("click", () => {
+          const isOpen = item.classList.contains("open");
+          document.querySelectorAll(".faq-item").forEach((i) => {
+            i.classList.remove("open");
+            i.querySelector(".faq-a").style.maxHeight = null;
+          });
+          if (!isOpen) {
+            item.classList.add("open");
+            a.style.maxHeight = a.scrollHeight + "px";
+          }
+        });
+      });
+
+      // booking form
+      const bookForm = document.getElementById("bookForm");
+      const successPanel = document.getElementById("successPanel");
+      const resetForm = document.getElementById("resetForm");
+      const formStatus = document.getElementById("formStatus");
+      const dateInput = document.getElementById("dataAgendamento");
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, "0");
+      const dd = String(today.getDate()).padStart(2, "0");
+      dateInput.min = `${yyyy}-${mm}-${dd}`;
+
+      bookForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fields = [
+          document.getElementById("barbeiro"),
+          document.getElementById("servico"),
+          document.getElementById("dataAgendamento"),
+          document.getElementById("horarioAgendamento"),
+          document.getElementById("nomeCliente"),
+          document.getElementById("telefoneCliente"),
+          document.getElementById("emailCliente"),
+        ];
+        const hasEmpty = fields.some((field) => !field.value.trim());
+        if (hasEmpty) {
+          formStatus.className = "form-status error";
+          formStatus.textContent =
+            "Preencha todos os campos obrigatórios antes de confirmar o agendamento.";
+          return;
+        }
+
+        const tk = "DIO-" + Math.floor(1000 + Math.random() * 8999);
+        document.getElementById("tkNum").textContent = "Ticket " + tk;
+        formStatus.className = "form-status success";
+        formStatus.textContent =
+          "Agendamento validado com sucesso. Seu ticket foi gerado.";
+        bookForm.style.display = "none";
+        successPanel.classList.add("show");
+      });
+      resetForm.addEventListener("click", () => {
+        bookForm.reset();
+        formStatus.className = "form-status";
+        formStatus.textContent = "";
+        bookForm.style.display = "";
+        successPanel.classList.remove("show");
+      });
+    </script>
+  </body>
+</html>
