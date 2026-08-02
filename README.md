@@ -11,6 +11,17 @@
 5. Inicie o servidor:
    npm run dev
 
+## Deploy no Railway
+
+- Banco: crie um serviço Postgres no Railway.
+- App: conecte este repositório e configure as variáveis de ambiente.
+- Build command:
+  npm run build
+- Start command:
+  npm run start
+- Variável essencial:
+  DATABASE_URL=<URL do Postgres do Railway>
+
 ## Endpoints
 
 - `POST /api/appointments`
