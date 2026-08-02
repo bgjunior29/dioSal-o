@@ -2197,7 +2197,7 @@
             <div class="form-grid">
               <div class="field">
                 <label>Barbeiro</label>
-                <select required>
+                <select name="professional" required>
                   <option value="">Selecione</option>
                   <option>Diego Martins</option>
                   <option>Bruno Alves</option>
@@ -2205,7 +2205,7 @@
               </div>
               <div class="field">
                 <label>Serviço</label>
-                <select required>
+                <select name="service" required>
                   <option value="">Selecione</option>
                   <option>Corte Tradicional</option>
                   <option>Degradê</option>
@@ -2214,26 +2214,42 @@
                 </select>
               </div>
               <div class="field">
-                <label>Data</label><input type="date" required />
+                <label>Data</label><input name="date" type="date" required />
               </div>
               <div class="field">
-                <label>Horário</label><input type="time" required />
+                <label>Horário</label><input name="time" type="time" required />
               </div>
               <div class="field full">
                 <label>Nome completo</label
-                ><input type="text" placeholder="Seu nome" required />
+                ><input
+                  name="name"
+                  type="text"
+                  placeholder="Seu nome"
+                  required
+                />
               </div>
               <div class="field">
                 <label>Telefone</label
-                ><input type="tel" placeholder="(11) 99999-0000" required />
+                ><input
+                  name="phone"
+                  type="tel"
+                  placeholder="(11) 99999-0000"
+                  required
+                />
               </div>
               <div class="field">
                 <label>E-mail</label
-                ><input type="email" placeholder="voce@email.com" required />
+                ><input
+                  name="email"
+                  type="email"
+                  placeholder="voce@email.com"
+                  required
+                />
               </div>
               <div class="field full">
                 <label>Observações</label
                 ><textarea
+                  name="notes"
                   placeholder="Alguma preferência ou observação?"
                 ></textarea>
               </div>
@@ -2675,12 +2691,32 @@
       const bookForm = document.getElementById("bookForm");
       const successPanel = document.getElementById("successPanel");
       const resetForm = document.getElementById("resetForm");
-      bookForm.addEventListener("submit", (e) => {
+      bookForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const tk = "DIO-" + Math.floor(1000 + Math.random() * 8999);
-        document.getElementById("tkNum").textContent = "Ticket " + tk;
-        bookForm.style.display = "none";
-        successPanel.classList.add("show");
+        const formData = new FormData(bookForm);
+        const payload = Object.fromEntries(formData.entries());
+
+        try {
+          const response = await fetch("/api/appointments", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          const result = await response.json();
+          if (!response.ok) {
+            throw new Error(
+              result.error || "Não foi possível confirmar o agendamento.",
+            );
+          }
+
+          document.getElementById("tkNum").textContent =
+            "Ticket " + result.ticket;
+          bookForm.style.display = "none";
+          successPanel.classList.add("show");
+        } catch (error) {
+          alert(error.message || "Erro ao confirmar agendamento.");
+        }
       });
       resetForm.addEventListener("click", () => {
         bookForm.reset();
