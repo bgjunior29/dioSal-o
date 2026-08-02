@@ -5,9 +5,10 @@
 1. Instale as dependências:
    npm install
 2. Copie o arquivo `.env.example` para `.env` e ajuste as variáveis.
-3. Gere o banco SQLite com Prisma:
-   npx prisma migrate dev --name init
-4. Inicie o servidor:
+3. Use um Postgres local ou do Railway como `DATABASE_URL`.
+4. Para o banco local, o valor padrão esperado é:
+   postgresql://postgres:postgres@localhost:5432/diosalaon?schema=public
+5. Inicie o servidor:
    npm run dev
 
 ## Endpoints
