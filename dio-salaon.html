@@ -2688,6 +2688,7 @@
       });
 
       // booking form
+      const API_BASE = "https://dio-salaon-api.up.railway.app";
       const bookForm = document.getElementById("bookForm");
       const successPanel = document.getElementById("successPanel");
       const resetForm = document.getElementById("resetForm");
@@ -2697,16 +2698,23 @@
         const payload = Object.fromEntries(formData.entries());
 
         try {
-          const response = await fetch("/api/appointments", {
+          const response = await fetch(`${API_BASE}/api/appointments`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
           });
 
-          const result = await response.json();
+          const text = await response.text();
+          let result = null;
+          try {
+            result = text ? JSON.parse(text) : null;
+          } catch {
+            throw new Error("A API retornou uma resposta inválida.");
+          }
+
           if (!response.ok) {
             throw new Error(
-              result.error || "Não foi possível confirmar o agendamento.",
+              result?.error || "Não foi possível confirmar o agendamento.",
             );
           }
 
