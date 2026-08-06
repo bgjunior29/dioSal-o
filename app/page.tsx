@@ -5,7 +5,7 @@ export default function HomePage() {
     <main>
       <div className="min-h-screen bg-[#0b0f0c] text-white">
         <div className="mx-auto max-w-4xl px-6 py-16">
-          <h1 className="text-4xl font-bold">Dio-Salaon</h1>
+          <h1 className="text-4xl font-bold">DioSalaon</h1>
           <p className="mt-4 text-white/70">
             Front-end do landing page já existe em HTML estático; esta rota
             Next.js foi criada para hospedar a API e o ambiente de agendamento

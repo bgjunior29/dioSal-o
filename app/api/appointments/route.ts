@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
   if (missing.length > 0) {
     return NextResponse.json(
-      { error: "Campos obrigatórios ausentes", fields: missing },
+      { error: "Campos obrigatórios", fields: missing },
       { status: 400 },
     );
   }
